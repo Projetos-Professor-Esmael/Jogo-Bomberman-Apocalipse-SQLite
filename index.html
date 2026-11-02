@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="theme-color" content="#080d18"><title>Bomberman: Apocalipse 2D</title>
+<link rel="stylesheet" href="game.css">
+</head>
+<body data-theme="dark">
+<canvas id="world"></canvas>
+<div id="vignette"></div>
+<header class="hud">
+  <div class="brand"><span class="sigil">✦</span><div><b>APOCALIPSE</b><small>2D ARCADE ADVENTURE</small></div></div>
+  <div class="hud-center"><span class="pill" id="worldName">MUNDO 01 · FLORESTA PRIMORDIAL</span><span class="level" id="levelName">FASE 01 / 50</span></div>
+  <div class="hud-right"><div class="hudstat"><small>TEMPO</small><b id="timer">03:00</b></div><div class="hudstat"><small>CRISTAIS</small><b id="crystalCount">000</b></div><div class="hudstat"><small>VIDAS</small><b id="lives">♥ ♥ ♥</b></div><button class="iconbtn" id="pauseBtn" title="Pausar">Ⅱ</button></div>
+</header>
+<div class="left-info"><div class="objective"><small>OBJETIVO ATUAL</small><b id="objective">Destrua os bloqueios e encontre o portal</b><div class="progress"><i id="progressBar"></i></div></div><div class="power-list" id="powerList"></div></div>
+<div class="bottom-hint" id="hint">WASD / SETAS mover · ESPAÇO bomba · E detonar · SHIFT esquiva</div>
+<div id="toast"></div>
+<div id="overlay" class="overlay">
+ <section class="menu-card" id="mainMenu">
+  <div class="overline">UMA NOVA ERA DE EXPLOSÕES</div><h1>BOMBERMAN<br><em>APOCALIPSE 2D</em></h1>
+  <p>Explore mundos esquecidos, abra caminho com explosivos e enfrente criaturas que evoluem a cada dimensão.</p>
+  <div class="menu-actions"><button class="primary" id="continueBtn">CONTINUAR CAMPANHA</button><button class="secondary" id="newBtn">NOVA CAMPANHA</button><button class="secondary" id="saveProgressBtn">SALVAR NA PASTA DO JOGO (.DB)</button><button class="secondary" id="importProgressBtn">IMPORTAR PROGRESSO (.DB)</button><button class="secondary" id="levelsBtn">SELEÇÃO DE FASES</button><button class="secondary" id="settingsBtn">CONFIGURAÇÕES</button></div>
+  <div class="menu-foot">50 FASES · 10 MUNDOS · 3 MINUTOS POR MISSÃO<br>O salvamento .DB pode ser gravado na mesma pasta deste jogo.</div>
+ </section>
+ <section class="menu-card hidden" id="settingsPanel">
+  <div class="overline">PERSONALIZAÇÃO</div><h2>CONFIGURAÇÕES</h2>
+  <div class="setting"><label for="themeSelect">Tema da interface</label><select id="themeSelect"><option value="dark">Escuro</option><option value="light">Claro</option></select></div>
+  <div class="setting"><label for="sfxVol">Efeitos sonoros <b id="sfxVal">75%</b></label><input id="sfxVol" type="range" min="0" max="100" value="75"></div>
+  <div class="setting"><label for="quality">Qualidade gráfica</label><select id="quality"><option value="low">Desempenho</option><option value="high" selected>Alta</option><option value="ultra">Ultra</option></select></div>
+  <div class="setting"><label for="difficulty">Dificuldade</label><select id="difficulty"><option value="easy">Explorador</option><option value="normal" selected>Aventureiro</option><option value="hard">Pesadelo</option></select></div>
+  <div class="setting"><label>Áudio</label><button class="secondary compact" id="muteBtn">SOM ATIVADO</button></div>
+  <div class="menu-actions"><button class="primary" id="saveSettings">SALVAR CONFIGURAÇÕES</button><button class="secondary" id="backSettings">VOLTAR</button></div>
+ </section>
+ <section class="menu-card hidden" id="levelsPanel">
+  <div class="overline">MAPA DA JORNADA</div><h2>SELECIONE A FASE</h2><p>As fases bloqueadas são liberadas ao concluir os portais anteriores.</p>
+  <div id="levelGrid" class="level-grid"></div>
+  <div class="menu-actions"><button class="secondary" id="backLevels">VOLTAR</button></div>
+ </section>
+ <section class="menu-card hidden" id="pausePanel">
+  <div class="overline">MISSÃO SUSPENSA</div><h2>PAUSADO</h2><p>Respire. O campo de batalha aguarda.</p>
+  <div class="menu-actions"><button class="primary" id="resumeBtn">RETOMAR</button><button class="secondary" id="pauseSaveBtn">SALVAR NA PASTA DO JOGO (.DB)</button><button class="secondary" id="pauseImportBtn">IMPORTAR PROGRESSO (.DB)</button><button class="secondary" id="pauseSettingsBtn">CONFIGURAÇÕES</button><button class="secondary" id="quitBtn">SAIR PARA O MENU</button></div>
+ </section>
+ <section class="menu-card hidden" id="resultPanel">
+  <div class="overline" id="resultOverline">MISSÃO CONCLUÍDA</div><h2 id="resultTitle">PORTAL ABERTO</h2><p id="resultText">O caminho para o próximo mundo está livre.</p>
+  <div class="result-stats"><div><small>PONTUAÇÃO</small><b id="resultScore">0</b></div><div><small>CRISTAIS</small><b id="resultCrystals">0</b></div><div><small>TEMPO RESTANTE</small><b id="resultTime">00:00</b></div></div>
+  <div class="menu-actions"><button class="primary" id="nextBtn">PRÓXIMA FASE</button><button class="secondary" id="retryBtn">REPETIR FASE</button><button class="secondary" id="resultMenuBtn">MENU PRINCIPAL</button></div>
+ </section>
+</div>
+<input id="progressFile" type="file" accept=".db,application/x-sqlite3,application/octet-stream" hidden>
+<div id="touchControls"><button id="touchLeft">◀</button><div><button id="touchUp">▲</button><div><button id="touchDown">▼</button><button id="touchBomb">✹</button></div></div><button id="touchRight">▶</button></div>
+<script src="game.js"></script>
+</body></html>
